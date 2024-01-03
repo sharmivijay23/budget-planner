@@ -5,12 +5,14 @@ import { useIncStore } from "./store";
 
 function Savings() {
 
-    const { SavingsSum } = useIncStore();
+    const { SavingsSum, IncomeSum } = useIncStore();
+    const savings = SavingsSum();
+    const income = IncomeSum();
 
     return (
         <>
-            <h3 className='section1'> Savings   <span> Rs.{SavingsSum().toFixed(2)} </span> </h3>
-
+            <h3 className='section1'> Savings   <span> Rs.{SavingsSum().toFixed(2)} / month </span> </h3>
+            <h3 className="percentage"> {income === 0 ? "" : `(${(savings / income * 100).toFixed(2)}% of income)`} </h3>
             <div className='flex-container2'>
                 <RowEntry labelid={"homePurchase"} label={"Home purchase"} />
                 <RowEntry labelid={"homeRenovation"} label={"Home renovation"} />

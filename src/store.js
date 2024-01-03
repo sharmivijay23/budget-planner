@@ -7,105 +7,135 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 //     updateval: (newVal) => set({ val: newVal })
 // }));
 
+const getMonthlyValue = (state, category) => {
+    // if monthly , just add
+    // if yearly, divide / 12 and then add
+    // if weekly, multiple by 4.30 and then add
+    let monthlyValue = 0;
+    const duration = state[category].duration
+    const value = state[category].value
+
+    if (duration === "Weekly") {
+        monthlyValue = ((parseFloat(value)) * 4.30) || 0;
+    }
+    else if (duration === "Monthly") {
+        monthlyValue = (parseFloat(value)) || 0;
+    }
+    else if (duration === "Yearly") {
+        monthlyValue = ((parseFloat(value)) / 12) || 0;
+    }
+    return monthlyValue;
+}
+
+const getMonthlySum = (state, categories) => {
+    const values = categories.map(category => getMonthlyValue(state, category));
+    const sum = values.reduce(
+        (accumulator, currVal) => accumulator + currVal,
+        0 // Initial value
+    );
+    return sum;
+}
+
+
 export const dataSet = (set, get) => ({
     netIncome: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     partnerIncome: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     rentalIncome: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     disabilityBenefit: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     homePurchase: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     homeRenovation: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     carPurchase: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     emergencyFund: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     retirementFund: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     miscellaneous: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     studentLoan: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     personalLoan: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     creditCard: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     housing: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     communications: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     food: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     insurance: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     transportation: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     education: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     medical: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     personalCare: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     recreation: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     pets: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     clothing: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
     giftsAndDonations: {
-        duration: "",
+        duration: "Monthly",
         value: "",
     },
 
@@ -115,62 +145,20 @@ export const dataSet = (set, get) => ({
             [labelid]: { ...state[labelid], value: newVal }
         }
     }),
+
     IncomeSum: () => {
-
-        // if monthly , just add
-        // if yearly, divide / 12 and then add
-        // if weekly, multiple by 4.30 and then add
-
-        // if (get().netIncome.duration === "Weekly") {
-        //     const monthlyNetIncome = ((parseFloat(get().netIncome.value)) * 4.30) || 0;
-        // }
-        // else if(get().netIncome.duration === "Monthly") {
-        //     const monthlyNetIncome = (parseFloat(get().netIncome.value)) || 0;
-        // }
-        // else if(get().netIncome.duration === "Yearly") {
-        //     const monthlyNetIncome = ((parseFloat(get().netIncome.value)) / 12) || 0;
-        // }
-        // else {
-        // const monthlyNetIncome = 0
-        // }
-        // return (
-        //     monthlyNetIncome
-        // );
-
-
-        const sum = (parseFloat(get().netIncome.value) || 0) +
-            (parseFloat(get().partnerIncome.value) || 0) +
-            (parseFloat(get().rentalIncome.value) || 0) +
-            (parseFloat(get().disabilityBenefit.value) || 0);
-        console.log(sum)
-        return sum;
+        const state = get();
+        const categories = ["netIncome", "partnerIncome", "rentalIncome", "disabilityBenefit"];
+        return getMonthlySum(state, categories);
     },
     SavingsSum: () => {
-        const sum = (parseFloat(get().homePurchase.value) || 0) +
-            (parseFloat(get().homeRenovation.value) || 0) +
-            (parseFloat(get().carPurchase.value) || 0) +
-            (parseFloat(get().emergencyFund.value) || 0) +
-            (parseFloat(get().retirementFund.value) || 0) +
-            (parseFloat(get().miscellaneous.value) || 0)
-        return sum;
+        const categories = ["homePurchase", "homeRenovation", "carPurchase", "emergencyFund", "retirementFund", "miscellaneous"];
+        return getMonthlySum(get(), categories);
     },
     ExpensesSum: () => {
-        const sum = (parseFloat(get().studentLoan.value) || 0) +
-            (parseFloat(get().personalLoan.value) || 0) +
-            (parseFloat(get().creditCard.value) || 0) +
-            (parseFloat(get().housing.value) || 0) +
-            (parseFloat(get().communications.value) || 0) +
-            (parseFloat(get().food.value) || 0) +
-            (parseFloat(get().insurance.value) || 0) +
-            (parseFloat(get().transportation.value) || 0) +
-            (parseFloat(get().education.value) || 0) +
-            (parseFloat(get().medical.value) || 0) +
-            (parseFloat(get().personalCare.value) || 0) +
-            (parseFloat(get().recreation.value) || 0) +
-            (parseFloat(get().pets.value) || 0) +
-            (parseFloat(get().clothing.value) || 0) +
-            (parseFloat(get().giftsAndDonations.value) || 0)
-        return sum;
+        const state = get();
+        const categories = ["studentLoan", "personalLoan", "creditCard", "housing", "communications", "food", "insurance", "transportation", "education", "medical", "personalCare", "recreation", "pets", "clothing", "giftsAndDonations"];
+        return getMonthlySum(state, categories);
     },
 
     // storage: createJSONStorage(() => localStorage),

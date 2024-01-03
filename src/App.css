@@ -25,9 +25,18 @@ h1 {
   display: flex;
   justify-content: space-between;
   background-color: lavender ;
-  margin-bottom: 8px;
+  margin-bottom: 0px;
 }
 
+.percentage {
+  display: flex;
+  justify-content: end;
+  background-color: lavender ;
+  margin-bottom: 8px;
+  margin-top: 0px;
+  font-size: 0.9em;
+  color: darkslategrey;
+}
 
 .flex-container1 {
   display: flex;

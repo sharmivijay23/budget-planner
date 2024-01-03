@@ -51,6 +51,7 @@ export const Amount = ({ labelid }) => {
       value={useIncStore((state) => state[labelid].value)}
       onChangeCapture={e => storeValue(labelid, e.target.value)}
       placeholder="0.00"
+      min="0"
     />
   )
 }

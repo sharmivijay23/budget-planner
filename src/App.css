@@ -1,37 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 h1 {
   text-align: center;
   color: purple;
 }
-
+/* 
 .table {
-  display:flex;
+  display: flex;
   flex-direction: column;
   margin-right: 150px;
   margin-left: 150px;
   width: 70%;
   border: 2px solid purple;
-  padding: 10px; 
-  
-}
+  padding: 10px;
+} */
 
 .tabname {
   background-color: mediumpurple;
   margin-top: 8px;
   margin-bottom: 5px;
-  
 }
 
 .section1 {
   display: flex;
   justify-content: space-between;
-  background-color: lavender ;
   margin-bottom: 0px;
 }
 
 .percentage {
   display: flex;
   justify-content: end;
-  background-color: lavender ;
+  background-color: lavender;
   margin-bottom: 8px;
   margin-top: 0px;
   font-size: 0.9em;

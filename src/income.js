@@ -9,7 +9,7 @@ function Income() {
 
     return (
         <>
-            <h3 className='section1'> Income <span>Rs. {IncomeSum().toFixed(2)} / month </span> </h3>
+            <h3 className='section1 font-bold text-xl'> Income <span>Rs. {IncomeSum().toFixed(2)} / month </span> </h3>
             <h3 className="percentage"> </h3>
             <div className='flex-container1'>
                 <RowEntry labelid={"netIncome"} label={"My Net Income"} />

@@ -11,7 +11,7 @@ export function Expenses() {
 
     return (
         <>
-            <h3 className='section1'> Expenses <span> Rs. {ExpensesSum().toFixed(2)} / month </span></h3>
+            <h3 className='section1 font-bold text-xl'> Expenses <span> Rs. {ExpensesSum().toFixed(2)} / month </span></h3>
             <h3 className="percentage"> {income === 0 ? "" : `(${(expenses / income * 100).toFixed(2)}% of income)`} </h3>
             <div className='flex-container3'>
                 <RowEntry labelid={"studentLoan"} label={"Student loan"} />

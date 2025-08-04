@@ -1,22 +1,20 @@
-import { useState } from 'react';
+
 import './App.css';
 import Income from './income';
 import Savings from './savings'
 import { Expenses } from './expenses';
 
-import { useBearStore } from './store';
+// import { useBearStore } from './store';
 
 function App() {
   return (
-    <div className='App'>
-      <h1> Budget Planner </h1>
-      <div className='table'>
-        <h2 className='tabname'> Budget </h2>
+    <div className="app flex justify-center flex-col" style= {{ backgroundImage : `url("/3.png")`}}>
+       <div className='font-bold text-4xl flex justify-center mx-auto p-6'> Budget Planner </div>
+      <div className='flex justify-center flex-col w-2/3 mx-auto border-purple-400 border-4 rounded-lg p-6'>
         {/* <Bears /> */}
         <Income />
         <Savings />
         <Expenses />
-
       </div>
     </div>
   )
